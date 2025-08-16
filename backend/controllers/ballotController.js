@@ -44,3 +44,26 @@ res.json(updatedBallot);
 res.status(500).json({ message: error.message });
 }
 };
+
+
+//Delete Ballot
+const deleteBallot = async (req, res) => {
+    try {
+        const ballot = await Ballot.findById(req.params.id);
+        if (!ballot) return res.status(404).json({ message: 'Ballot not found' });
+
+        await ballot.remove();
+        res.json({ message: 'Ballot deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = {
+    getBallots,
+    addBallot,
+    updateBallot,
+    deleteBallot
+};
+
+//Exporting the functions to be used in route
