@@ -7,6 +7,7 @@ const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
+//Register a New User
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
     try {
@@ -20,6 +21,7 @@ const registerUser = async (req, res) => {
     }
 };
 
+//User Log In
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -34,6 +36,7 @@ const loginUser = async (req, res) => {
     }
 };
 
+//Register User Authentication
 const getProfile = async (req, res) => {
     try {
       const user = await User.findById(req.user.id);
@@ -52,7 +55,9 @@ const getProfile = async (req, res) => {
     }
   };
 
-const updateUserProfile = async (req, res) => {
+
+//Updates User's profile in MongoDB
+  const updateUserProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(404).json({ message: 'User not found' });
