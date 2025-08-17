@@ -1,12 +1,12 @@
 //View Ballots
 const Ballot = require('../models/Ballot');
 
-const getBallots = async(req,res)=>{
+const getBallot = async(req,res)=>{
 
 try {
 
-const ballots = await Ballot.find({ userId: req.user.id });
-res.json(ballots);
+const ballot = await Ballot.find({ userId: req.user.id });
+res.json(ballot);
 } catch (error) {
 res.status(500).json({ message: error.message });
 
@@ -60,7 +60,7 @@ const deleteBallot = async (req, res) => {
 };
 
 module.exports = {
-    getBallots,
+    getBallot,
     addBallot,
     updateBallot,
     deleteBallot
