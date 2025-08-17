@@ -1,7 +1,7 @@
 //View Ballots
 const Ballot = require('../models/Ballot');
 
-const getBallots = async(req,res)=>{
+const getBallot = async(req,res)=>{
 
 try {
 
