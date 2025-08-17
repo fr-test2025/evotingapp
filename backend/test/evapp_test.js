@@ -77,7 +77,7 @@ describe('AddBallot Function Test', () => {
 });
 
 
-describe('Update Function Test', () => {
+describe('Update Ballot Test', () => {
 
   it('should update ballot successfully', async () => {
     // Mock ballot data
