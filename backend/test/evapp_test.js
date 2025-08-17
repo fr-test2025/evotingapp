@@ -6,7 +6,7 @@ const connectDB = require('../config/db');
 const mongoose = require('mongoose');
 const sinon = require('sinon');
 const Task = require('../models/Ballot');
-const { updateBallot,Ballot,addBallot,deleteBallot } = require('../controllers/ballotController');
+const { updateBallot,getBallot,addBallot,deleteBallot } = require('../controllers/ballotController');
 const { expect } = chai;
 
 chai.use(chaiHttp);
@@ -121,7 +121,7 @@ describe('Update Function Test', () => {
 
 
   it('should return 404 if ballot is not found', async () => {
-    const findByIdStub = sinon.stub(Ballot, 'findById').resolves(null);
+    const findByIdStub = sinon.stub(getBallot, 'findById').resolves(null);
 
     const req = { params: { id: new mongoose.Types.ObjectId() }, body: {} };
     const res = {
@@ -167,13 +167,13 @@ describe('GetBallot Function Test', () => {
     const userId = new mongoose.Types.ObjectId();
 
     // Mock ballot data
-    const ballots = [
+    const ballot = [
       { _id: new mongoose.Types.ObjectId(), topic: "Ballot 1", userId, option1: "Option 1", option2: "Option 2", option3: "Option 3" },
       { _id: new mongoose.Types.ObjectId(), topic: "Ballot 2", userId, option1: "Option 1", option2: "Option 2", option3: "Option 3" }
     ];
 
     // Stub Ballot.find to return mock ballots
-    const findStub = sinon.stub(Ballot, 'find').resolves(ballots);
+    const findStub = sinon.stub(Ballot, 'find').resolves(ballot);
 
     // Mock request & response
     const req = { user: { id: userId } };
@@ -183,11 +183,11 @@ describe('GetBallot Function Test', () => {
     };
 
     // Call function
-    await getBallots(req, res);
+    await getBallot(req, res);
 
     // Assertions
     expect(findStub.calledOnceWith({ userId })).to.be.true;
-    expect(res.json.calledWith(ballots)).to.be.true;
+    expect(res.json.calledWith(ballot)).to.be.true;
     expect(res.status.called).to.be.false; // No error status should be set
 
     // Restore stubbed methods
@@ -206,7 +206,7 @@ describe('GetBallot Function Test', () => {
     };
 
     // Call function
-    await getBallots(req, res);
+    await getBallot(req, res);
 
     // Assertions
     expect(res.status.calledWith(500)).to.be.true;
