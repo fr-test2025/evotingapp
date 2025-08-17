@@ -5,7 +5,7 @@ const app = require('../server');
 const connectDB = require('../config/db');
 const mongoose = require('mongoose');
 const sinon = require('sinon');
-const Task = require('../models/Ballot');
+const Task = require('../models/Ballot.js');
 const { updateBallot,getBallot,addBallot,deleteBallot } = require('../controllers/ballotController');
 const { expect } = chai;
 
