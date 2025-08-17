@@ -81,8 +81,13 @@ We will send you an email to choose a Real-World project. If you face any diffic
 * CI/CD pipeline details step by step screenshot.
 * README.md with:
 * Project setup instructions.
+* //this doesn't work as the coded feature is not working and nginx stopped working after I changed the axiosConfig to comment out the local url and replace it with the public IP URL. nginx would also not let me uninstall / reinstall and I could not successfully set up another EC2 instance or troubleshoot it successfully.
 * Public URL of your project.
+* //http://3.27.245.30:5001
 * Provide a project-specific username and password if we need to access your dashboard.
+* //this account was initially successfully created however I can no longer access the frontend as per above comment.
+* User: fcruise@evapp.com
+* Pass (project specific): evapp123
 
 ---
 
