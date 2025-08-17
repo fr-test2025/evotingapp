@@ -1,36 +1,36 @@
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
-const TaskList = ({ tasks, setTasks, setEditingTask }) => {
+const BallotList = ({ ballots, setBallots, setEditingBallot }) => {
   const { user } = useAuth();
 
-  const handleDelete = async (taskId) => {
+  const handleDelete = async (ballotId) => {
     try {
-      await axiosInstance.delete(`/api/tasks/${taskId}`, {
+      await axiosInstance.delete(`/api/ballots/${ballotId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
-      setTasks(tasks.filter((task) => task._id !== taskId));
+      setBallots(ballots.filter((ballot) => ballot._id !== ballotId));
     } catch (error) {
-      alert('Failed to delete task.');
+      alert('Failed to delete ballot.');
     }
   };
 
   return (
     <div>
-      {tasks.map((task) => (
-        <div key={task._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
-          <h2 className="font-bold">{task.title}</h2>
-          <p>{task.description}</p>
-          <p className="text-sm text-gray-500">Deadline: {new Date(task.deadline).toLocaleDateString()}</p>
+      {ballot.map((ballot) => (
+        <div key={ballot._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
+          <h2 className="font-bold">{ballot.topic}</h2>
+          <p>{ballot.description}</p>
+          <p className="text-sm text-gray-500">Topic: {new Date(ballot.topic).toLocaleDateString()}</p>
           <div className="mt-2">
             <button
-              onClick={() => setEditingTask(task)}
+              onClick={() => setEditingBallot(ballot)}
               className="mr-2 bg-yellow-500 text-white px-4 py-2 rounded"
             >
               Edit
             </button>
             <button
-              onClick={() => handleDelete(task._id)}
+              onClick={() => handleDelete(ballot._id)}
               className="bg-red-500 text-white px-4 py-2 rounded"
             >
               Delete
@@ -42,4 +42,4 @@ const TaskList = ({ tasks, setTasks, setEditingTask }) => {
   );
 };
 
-export default TaskList;
+export default BallotList;
